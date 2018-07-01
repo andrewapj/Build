@@ -187,9 +187,8 @@
         </module>
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
-            <property name="allowedAbbreviationLength" value="1"/>
-            <property name="allowedAbbreviations" value="IT"/>
-            <property name="allowedAbbreviations" value="API"/>
+            <property name="allowedAbbreviationLength" value="3"/>
+            <property name="allowedAbbreviations" value="CRUD"/>
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
