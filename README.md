@@ -6,7 +6,7 @@ Contains the following modules that assist in building software:
 
 Builds and configures Mac OS.
 
-## gradle-build
+## gradle-build-java
 
-Assists in building Gradle projects that wish to include plugins like
+Assists in building Gradle based Java projects that wish to include plugins like
 Checkstyle, Findbugs and JaCoCo.
