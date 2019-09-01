@@ -3,7 +3,7 @@ apply plugin: "jacoco"
 apply plugin: "java"
 
 task fetchCheckStyleConfig(type:Download) {
-    sourceUrl = 'https://raw.githubusercontent.com/andrewapj/Build/master/gradle-build/config/checkstyle/checkstyle.xml'
+    sourceUrl = 'https://raw.githubusercontent.com/andrewapj/Build/master/java/checkstyle/checkstyle.xml'
     target = new File('config/checkstyle/checkstyle.xml')
     ignoreErrors = true
 }
