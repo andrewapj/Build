@@ -19,7 +19,10 @@
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
     </module>
-
+    <module name="LineLength">
+        <property name="max" value="100"/>
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+    </module>
     <module name="TreeWalker">
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
@@ -31,10 +34,6 @@
             <property name="allowEscapesForControlCharacters" value="true"/>
             <property name="allowByTailComment" value="true"/>
             <property name="allowNonPrintableEscapes" value="true"/>
-        </module>
-        <module name="LineLength">
-            <property name="max" value="100"/>
-            <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
         </module>
         <module name="AvoidStarImport"/>
         <module name="RedundantImport"/>
@@ -236,9 +235,11 @@
         <!-- Required by SuppressWarningsFilter below -->
         <module name="SuppressWarningsHolder"/>
 
-        <!-- Allow turning checks off in the code -->
-        <!-- See http://checkstyle.sourceforge.net/config.html#SuppressionCommentFilter -->
-        <module name="SuppressionCommentFilter"/>
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CSOFF\: ([\w\|]+)"/>
+            <property name="onCommentFormat" value="CSON\: ([\w\|]+)"/>
+            <property name="checkFormat" value="$1"/>
+        </module>
     </module>
 
     <!-- Allow turning checks off in the code using @SuppressWarnings annotation -->
