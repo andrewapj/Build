@@ -3,5 +3,3 @@ brew cask install homebrew/cask-versions/java11 arq atom bitwarden docker google
 brew install git gradle httpie maven node wget youtube-dl
 cp .bash_profile ~/
 cp .zshenv ~/
-npm install -g typescript
-npm install -g @angular/cli
