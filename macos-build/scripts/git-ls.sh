@@ -5,12 +5,13 @@
 ###
 
 CODE_DIR=$1
+DEPTH=$2
 START_DIR=`pwd`
 
 clear
 
-for d in $(find $CODE_DIR -type d -d 1);
-do 
+for d in $(find $CODE_DIR -type d -d $DEPTH);
+do
 	cd ${d};
 	echo ${d};
 	git branch;
