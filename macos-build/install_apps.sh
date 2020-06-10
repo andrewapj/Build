@@ -3,3 +3,4 @@ brew cask install homebrew/cask-versions/java11 arq bitwarden docker google-back
 brew install git gradle httpie maven nmap node wget youtube-dl
 cp .bash_profile ~/
 cp .zshenv ~/
+cp scripts/* /usr/local/bin/
