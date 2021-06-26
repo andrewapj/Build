@@ -13,4 +13,5 @@ This guide shows you how to configure your Mac using Homebrew.
 7. Activate the idea.sh script within Jetbrains Toolbox, set the location to /usr/local/bin
 8. Install the following IntelliJ plugins. CheckStyle-IDEA, Lombok, Maven Helper.
 9. Install Android Studio from the Jetbrains Toolbox.
-10. Run ```flutter doctor``` and follow the instructions to complete the installation. Further information can be found [here](https://flutter.dev/docs/get-started/install/macos)
+10. Install the following Android Studio plugins. Flutter.
+11. Run ```flutter doctor``` and follow the instructions to complete the installation. Further information can be found [here](https://flutter.dev/docs/get-started/install/macos)
