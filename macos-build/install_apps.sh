@@ -6,6 +6,9 @@ brew install adoptopenjdk adoptopenjdk8 maven
 # Go
 brew install go
 
+# Flutter
+brew install flutter cocoapods
+
 # Development
 brew install docker git jetbrains-toolbox
 
