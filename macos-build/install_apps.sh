@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Java
-brew install adoptopenjdk adoptopenjdk8 maven
+brew install adoptopenjdk maven
 
 # Go
 brew install go
