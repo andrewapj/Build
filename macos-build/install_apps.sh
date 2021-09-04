@@ -6,6 +6,9 @@ brew install adoptopenjdk maven
 # Go
 brew install go
 
+# Aws
+brew install awscli
+
 # Development
 brew install docker git jetbrains-toolbox
 
