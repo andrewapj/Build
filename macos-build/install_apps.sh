@@ -9,6 +9,9 @@ brew install go
 # Aws
 brew install awscli
 
+# JavaScript
+brew install node
+
 # Development
 brew install docker git jetbrains-toolbox
 
