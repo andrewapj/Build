@@ -2,7 +2,7 @@
 
 # Java
 brew install --cask temurin
-brew install maven
+brew install --ignore-dependencies maven
 
 # Go
 brew install go
