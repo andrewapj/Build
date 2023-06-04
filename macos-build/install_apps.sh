@@ -9,9 +9,6 @@ brew install gradle
 # Go
 brew install go
 
-# Rust
-brew install rustup-init
-
 # Aws
 brew install awscli
 
@@ -23,7 +20,7 @@ brew install git jetbrains-toolbox
 brew install --cask docker
 
 # Other
-brew install bitwarden google-drive google-chrome iterm2 keka postman visual-studio-code vlc wrk yt-dlp
+brew install bitwarden google-drive google-chrome iterm2 keka postman vlc wrk
 
 cp .zshrc ~/
 cp launchd.conf /etc
