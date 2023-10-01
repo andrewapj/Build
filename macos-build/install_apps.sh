@@ -20,7 +20,7 @@ brew install git jetbrains-toolbox
 brew install --cask docker
 
 # Other
-brew install bitwarden google-drive google-chrome iterm2 keka postman vlc wrk
+brew install bitwarden google-drive google-chrome iterm2 keka wrk
 
 cp .zshrc ~/
 cp launchd.conf /etc
