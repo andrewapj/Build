@@ -2,18 +2,18 @@
 
 # Java
 brew tap homebrew/cask-versions
-brew install --cask temurin17
+brew install --cask temurin
 brew install maven
 brew install gradle
 
 # Go
 brew install go
 
+# Node
+brew install node
+
 # Aws
 brew install awscli
-
-# JavaScript
-brew install node
 
 # Development
 brew install git jetbrains-toolbox
