@@ -9,9 +9,6 @@ brew install gradle
 # Go
 brew install go
 
-# Rust
-brew install rustup
-
 # Node
 brew install node
 
