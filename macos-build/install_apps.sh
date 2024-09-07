@@ -9,9 +9,6 @@ brew install gradle
 # Go
 brew install go
 
-# Node
-brew install node
-
 # Aws
 brew install awscli
 
@@ -20,7 +17,7 @@ brew install git jetbrains-toolbox
 brew install --cask docker
 
 # Other
-brew install bitwarden google-drive google-chrome iterm2 keka wrk
+brew install 1password appcleaner google-chrome google-drive iterm2 keka wrk
 
 cp .zshrc ~/
 cp launchd.conf /etc
