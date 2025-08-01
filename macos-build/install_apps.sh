@@ -15,6 +15,7 @@ brew install awscli
 # Development
 brew install git jetbrains-toolbox
 brew install --cask docker
+brew install gemini-cli
 
 # Other
 brew install 1password appcleaner google-chrome google-drive iterm2 keka wrk
