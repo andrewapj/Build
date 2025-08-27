@@ -3,14 +3,11 @@
 # Java
 brew tap homebrew/cask-versions
 brew install --cask temurin
-brew install maven
-brew install gradle
+brew install --ignore-dependencies maven
+brew install --ignore-dependencies gradle
 
 # Go
 brew install go
-
-# Aws
-brew install awscli
 
 # Development
 brew install git jetbrains-toolbox
