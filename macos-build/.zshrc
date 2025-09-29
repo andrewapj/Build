@@ -3,3 +3,4 @@
 export JAVA_HOME=`/usr/libexec/java_home`
 
 alias ll="ls -l"
+alias lla="ls -la"
