@@ -7,11 +7,11 @@ brew install \
   appcleaner \
   docker-desktop \
   gemini-cli \
+  ghostty \
   git \
   go \
   google-chrome \
   google-drive \
-  iterm2 \
   jetbrains-toolbox \
   keka \
   temurin \
