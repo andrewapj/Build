@@ -1,31 +1,26 @@
 #!/bin/bash
 
 # -------------------------------------------------------------------------
-# SETUP: Capture the folder path from the user input (Argument $1)
+# SETUP: Handle User Input & Safety Checks
 # -------------------------------------------------------------------------
-TAKEOUT_DIR="$1"
 
-# CHECK 1: Did the user provide an argument?
-if [ -z "$TAKEOUT_DIR" ]; then
-    echo "❌ Error: Missing input folder."
-    echo "Usage: ./backup.sh /path/to/your/takeout/folder"
-    echo "Example: ./backup.sh /Users/name/Downloads/takeout-2023"
-    exit 1
-fi
+# 1. Capture the argument (if provided)
+TAKEOUT_DIR="${1:-}"
 
-# CHECK 2: Does that folder actually exist?
-if [ ! -d "$TAKEOUT_DIR" ]; then
-    echo "❌ Error: The directory '$TAKEOUT_DIR' does not exist."
-    exit 1
+# 2. SAFETY NET: Expand "~" if it was quoted by the user
+#    (Changes "~/Downloads" -> "/Users/steve/Downloads")
+if [[ "$TAKEOUT_DIR" == \~* ]]; then
+    TAKEOUT_DIR="${TAKEOUT_DIR/#\~/$HOME}"
 fi
 
 # -------------------------------------------------------------------------
-# STEP 1: Sync Google Drive directly to Backblaze (Streaming)
+# STEP 1: Sync Google Drive (Always Runs)
 # -------------------------------------------------------------------------
 echo ""
 echo "🚀 Starting Google Drive -> B2 Sync..."
 echo "----------------------------------------"
 
+# Note: Added --drive-skip-gdocs to avoid duplicate errors if using export-formats
 rclone sync gdrive: b2crypt:drive \
   --drive-export-formats docx,xlsx,pptx \
   --drive-acknowledge-abuse \
@@ -34,16 +29,33 @@ rclone sync gdrive: b2crypt:drive \
   --progress
 
 # -------------------------------------------------------------------------
-# STEP 2: Sync Local Takeout folder to Backblaze
+# STEP 2: Sync Takeout (Optional - Only runs if path provided)
 # -------------------------------------------------------------------------
 echo ""
-echo "📂 Starting Takeout ($TAKEOUT_DIR) -> B2 Sync..."
 echo "----------------------------------------"
 
-rclone sync "$TAKEOUT_DIR" b2crypt:takeout \
-  --fast-list \
-  --transfers 32 \
-  --progress
+if [ -z "$TAKEOUT_DIR" ]; then
+    # CASE A: User provided nothing
+    echo "⚠️  No Takeout path provided."
+    echo "⏭️  Skipping Takeout backup."
+    
+elif [ -d "$TAKEOUT_DIR" ]; then
+    # CASE B: Valid folder found
+    echo "📂 Found Takeout directory: $TAKEOUT_DIR"
+    echo "🚀 Starting Takeout -> B2 Sync..."
+    
+    rclone sync "$TAKEOUT_DIR" b2crypt:takeout \
+      --fast-list \
+      --transfers 32 \
+      --progress
+      
+    echo "✅ Takeout Sync Complete."
+    
+else
+    # CASE C: Invalid folder found
+    echo "❌ Error: The directory '$TAKEOUT_DIR' does not exist."
+    echo "⏭️  Skipping Takeout backup."
+fi
 
 echo ""
-echo "✅ Backup Complete!"
+echo "🎉 All Backup Tasks Finished!"
