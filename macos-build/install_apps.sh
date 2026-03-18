@@ -6,7 +6,6 @@ brew install \
   1password \
   appcleaner \
   docker-desktop \
-  gemini-cli \
   ghostty \
   git \
   go \
