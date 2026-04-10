@@ -5,6 +5,8 @@ brew tap homebrew/cask-versions
 brew install \
   1password \
   appcleaner \
+  cloc \
+  codex-app
   docker-desktop \
   ghostty \
   git \
@@ -13,7 +15,10 @@ brew install \
   google-drive \
   jetbrains-toolbox \
   keka \
+  opencode \
+  rclone \
   temurin \
+  tree \
   utm \
   wrk
 
