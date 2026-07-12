@@ -5,8 +5,8 @@ brew tap homebrew/cask-versions
 brew install \
   1password \
   appcleaner \
+  chatgpt \
   cloc \
-  codex-app
   docker-desktop \
   ghostty \
   git \
