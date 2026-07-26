@@ -1,61 +1,64 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Usage: backup.sh [optional_local_directory]
 
 # -------------------------------------------------------------------------
-# SETUP: Handle User Input & Safety Checks
+# SETUP: Define the backup locations and perform safety checks
 # -------------------------------------------------------------------------
 
-# 1. Capture the argument (if provided)
+readonly SOURCE="${HOME}/GDrive"
+readonly BUCKET="b2plain:andrew-apj-backup"
+readonly DESTINATION="${BUCKET}/drive"
+readonly TAKEOUT_DESTINATION="${BUCKET}/takeout"
+readonly TRANSFERS=8
+
+if (( $# > 1 )); then
+  echo "Usage: $0 [optional_local_directory]" >&2
+  exit 1
+fi
+
 TAKEOUT_DIR="${1:-}"
 
-# 2. SAFETY NET: Expand "~" if it was quoted by the user
-#    (Changes "~/Downloads" -> "/Users/steve/Downloads")
+# Expand a quoted tilde, such as "~/Downloads/Takeout".
 if [[ "$TAKEOUT_DIR" == \~* ]]; then
-    TAKEOUT_DIR="${TAKEOUT_DIR/#\~/$HOME}"
+  TAKEOUT_DIR="${TAKEOUT_DIR/#\~/$HOME}"
+fi
+
+# The b2plain remote must be configured separately with `rclone config`.
+if ! command -v rclone >/dev/null 2>&1; then
+  echo "Error: rclone is not installed or is not available in PATH." >&2
+  exit 1
+fi
+
+if [[ ! -d "$SOURCE" ]]; then
+  echo "Error: Source directory does not exist: $SOURCE" >&2
+  exit 1
+fi
+
+if [[ -n "$TAKEOUT_DIR" && ! -d "$TAKEOUT_DIR" ]]; then
+  echo "Error: Optional directory does not exist: $TAKEOUT_DIR" >&2
+  exit 1
 fi
 
 # -------------------------------------------------------------------------
-# STEP 1: Sync Google Drive (Always Runs)
+# BACKUP: Sync the contents of the source to the destination
 # -------------------------------------------------------------------------
-echo ""
-echo "🚀 Starting Google Drive -> B2 Sync..."
-echo "----------------------------------------"
 
-# Note: Added --drive-skip-gdocs to avoid duplicate errors if using export-formats
-rclone sync gdrive: b2crypt:drive \
-  --drive-export-formats docx,xlsx,pptx \
-  --drive-acknowledge-abuse \
-  --fast-list \
-  --transfers 32 \
-  --progress
+# `sync` removes destination-only files after uploading new or changed files.
+echo "Syncing $SOURCE to $DESTINATION..."
+rclone sync "$SOURCE" "$DESTINATION" --transfers "$TRANSFERS" --fast-list --progress
 
 # -------------------------------------------------------------------------
-# STEP 2: Sync Takeout (Optional - Only runs if path provided)
+# TAKEOUT: Sync the optional directory to the takeout destination
 # -------------------------------------------------------------------------
-echo ""
-echo "----------------------------------------"
 
-if [ -z "$TAKEOUT_DIR" ]; then
-    # CASE A: User provided nothing
-    echo "⚠️  No Takeout path provided."
-    echo "⏭️  Skipping Takeout backup."
-    
-elif [ -d "$TAKEOUT_DIR" ]; then
-    # CASE B: Valid folder found
-    echo "📂 Found Takeout directory: $TAKEOUT_DIR"
-    echo "🚀 Starting Takeout -> B2 Sync..."
-    
-    rclone sync "$TAKEOUT_DIR" b2crypt:takeout \
-      --fast-list \
-      --transfers 32 \
-      --progress
-      
-    echo "✅ Takeout Sync Complete."
-    
+if [[ -n "$TAKEOUT_DIR" ]]; then
+  echo "Syncing $TAKEOUT_DIR to $TAKEOUT_DESTINATION..."
+  rclone sync "$TAKEOUT_DIR" "$TAKEOUT_DESTINATION" --transfers "$TRANSFERS" --fast-list --progress
 else
-    # CASE C: Invalid folder found
-    echo "❌ Error: The directory '$TAKEOUT_DIR' does not exist."
-    echo "⏭️  Skipping Takeout backup."
+  echo "No optional directory provided; skipping takeout backup."
 fi
 
-echo ""
-echo "🎉 All Backup Tasks Finished!"
+echo "Backup complete."
