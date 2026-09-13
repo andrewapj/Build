@@ -47,8 +47,9 @@ fi
 # -------------------------------------------------------------------------
 
 # `sync` removes destination-only files after uploading new or changed files.
+# Exclude .DS_Store at every depth and delete existing destination copies.
 echo "Syncing $SOURCE to $DESTINATION..."
-rclone sync "$SOURCE" "$DESTINATION" --transfers "$TRANSFERS" --fast-list --progress
+rclone sync "$SOURCE" "$DESTINATION" --transfers "$TRANSFERS" --fast-list --progress --exclude '.DS_Store' --delete-excluded
 
 # -------------------------------------------------------------------------
 # TAKEOUT: Sync the optional directory to the takeout destination
@@ -56,7 +57,7 @@ rclone sync "$SOURCE" "$DESTINATION" --transfers "$TRANSFERS" --fast-list --prog
 
 if [[ -n "$TAKEOUT_DIR" ]]; then
   echo "Syncing $TAKEOUT_DIR to $TAKEOUT_DESTINATION..."
-  rclone sync "$TAKEOUT_DIR" "$TAKEOUT_DESTINATION" --transfers "$TRANSFERS" --fast-list --progress
+  rclone sync "$TAKEOUT_DIR" "$TAKEOUT_DESTINATION" --transfers "$TRANSFERS" --fast-list --progress --exclude '.DS_Store' --delete-excluded
 else
   echo "No optional directory provided; skipping takeout backup."
 fi
