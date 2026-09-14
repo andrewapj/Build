@@ -4,7 +4,6 @@ brew tap homebrew/cask-versions
 
 brew install \
   1password \
-  appcleaner \
   chatgpt \
   cloc \
   docker-desktop \
@@ -15,7 +14,7 @@ brew install \
   google-drive \
   jetbrains-toolbox \
   keka \
-  opencode \
+  anomalyco/tap/opencode \
   rclone \
   temurin \
   tree \
