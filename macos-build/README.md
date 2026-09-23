@@ -1,13 +1,32 @@
-# Mac Config
+# Mac Setup
 
-## Overview
+A short guide to setting up a fresh Mac with Homebrew, applications, and shell configuration.
 
-This guide shows you how to configure your Mac using Homebrew.
+## 1. Install Homebrew
 
-1. Install Homebrew, follow the instructions [here](http://brew.sh/)
-2. Install Xcode via the app store.
-3. Run ```./install_apps.sh```
-4. Add your machines hostname to `/etc/hosts`. Make the hostname resolve to `127.0.0.1` and `::1`.
-5. Generate an ssh key if required. ```ssh-keygen -t rsa -b 4096 -C "your_email@example.com"```
-6. Activate the idea.sh script within Jetbrains Toolbox, set the location to /usr/local/bin
-7. Install the following IntelliJ plugins. Lombok, Maven Helper.
+- Follow the instructions at [brew.sh](https://brew.sh/).
+- Install the Xcode Command Line Tools if prompted.
+- Follow the installer’s “Next steps” to add Homebrew to your shell environment.
+- Confirm Homebrew is available with `brew --version`.
+
+## 2. Download this repository
+
+- Download this repository as a ZIP and extract it.
+- Open Terminal in the extracted `macos-build` directory.
+
+## 3. Run the setup script
+
+- Review `install_apps.sh` and `.zshrc`.
+- Back up your existing `~/.zshrc` if you want to keep it; the script replaces it.
+- Run the setup script:
+
+  ```sh
+  ./install_apps.sh
+  ```
+
+- Open a new terminal window when setup is complete.
+
+The script:
+- Installs the applications and development tools listed in `install_apps.sh`.
+- Copies `.zshrc` to your home directory, replacing any existing version.
+- Copies helper scripts from `scripts/` into `/usr/local/bin/`.
