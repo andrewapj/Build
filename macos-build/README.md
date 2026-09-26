@@ -30,3 +30,9 @@ The script:
 - Installs the applications and development tools listed in `install_apps.sh`.
 - Copies `.zshrc` to your home directory, replacing any existing version.
 - Copies helper scripts from `scripts/` into `/usr/local/bin/`.
+
+## 4. Restore access and configuration
+
+- Restore your SSH key from your password manager.
+- Set up rclone, which is required for the backup script.
+- Copy the config files in the backup's `macos` directory to their relevant directories under your home directory.

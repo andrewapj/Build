@@ -12,6 +12,7 @@ readonly SOURCE="${HOME}/GDrive"
 readonly BUCKET="b2plain:andrew-apj-backup"
 readonly DESTINATION="${BUCKET}/drive"
 readonly TAKEOUT_DESTINATION="${BUCKET}/takeout"
+readonly MACOS_DESTINATION="${BUCKET}/macos"
 readonly TRANSFERS=8
 
 if (( $# > 1 )); then
@@ -61,5 +62,19 @@ if [[ -n "$TAKEOUT_DIR" ]]; then
 else
   echo "No optional directory provided; skipping takeout backup."
 fi
+
+# -------------------------------------------------------------------------
+# MACOS: Copy selected configuration files, preserving home-relative paths
+# -------------------------------------------------------------------------
+
+for relative_path in '.gitconfig' 'Library/Application Support/com.mitchellh.ghostty/config'; do
+  config_file="${HOME}/${relative_path}"
+  if [[ -f "$config_file" ]]; then
+    echo "Backing up $config_file..."
+    rclone copyto "$config_file" "${MACOS_DESTINATION}/${relative_path}" --progress
+  else
+    echo "Config file not found: $config_file; skipping."
+  fi
+done
 
 echo "Backup complete."
