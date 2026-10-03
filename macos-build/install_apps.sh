@@ -32,6 +32,9 @@ brew install \
 
 cp "$script_dir/.zshrc" "$HOME/.zshrc"
 
+mkdir -p "$HOME/.agents/skills"
+cp -R "$script_dir/skills/." "$HOME/.agents/skills/"
+
 if [[ ! -d /usr/local/bin ]]; then
   if [[ -d /usr/local && -w /usr/local ]]; then
     mkdir -p /usr/local/bin

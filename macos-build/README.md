@@ -18,6 +18,7 @@ A short guide to setting up a fresh Mac with Homebrew, applications, and shell c
 
 - Review `install_apps.sh` and `.zshrc`.
 - Back up your existing `~/.zshrc` if you want to keep it; the script replaces it.
+- Back up any locally modified skills in `~/.agents/skills/`; matching files are replaced by the bundled versions.
 - Run the setup script:
 
   ```sh
@@ -30,6 +31,9 @@ The script:
 - Installs the applications and development tools listed in `install_apps.sh`.
 - Copies `.zshrc` to your home directory, replacing any existing version.
 - Copies helper scripts from `scripts/` into `/usr/local/bin/`.
+- Creates `~/.agents/skills/` if needed and copies bundled skills from `skills/`, replacing matching files while leaving unrelated skills alone.
+
+Maintain bundled skills in this repository's `skills/` directory so changes are versioned.
 
 ## 4. Restore access and configuration
 
