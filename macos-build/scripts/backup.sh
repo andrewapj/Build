@@ -67,7 +67,7 @@ fi
 # MACOS: Copy selected configuration files, preserving home-relative paths
 # -------------------------------------------------------------------------
 
-for relative_path in '.gitconfig' 'Library/Application Support/com.mitchellh.ghostty/config'; do
+for relative_path in '.gitconfig' 'Library/Application Support/com.mitchellh.ghostty/config' '.config/zed/settings.json'; do
   config_file="${HOME}/${relative_path}"
   if [[ -f "$config_file" ]]; then
     echo "Backing up $config_file..."
