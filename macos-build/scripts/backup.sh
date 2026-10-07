@@ -67,8 +67,15 @@ fi
 # MACOS: Copy selected configuration files, preserving home-relative paths
 # -------------------------------------------------------------------------
 
-for relative_path in '.gitconfig' 'Library/Application Support/com.mitchellh.ghostty/config' '.config/zed/settings.json'; do
-  config_file="${HOME}/${relative_path}"
+# Ignore unmatched theme globs when the themes directory is missing or empty.
+shopt -s nullglob
+
+for config_file in \
+  "${HOME}/.gitconfig" \
+  "${HOME}/Library/Application Support/com.mitchellh.ghostty/config" \
+  "${HOME}/.config/zed/settings.json" \
+  "${HOME}/.config/zed/themes/"*.json; do
+  relative_path="${config_file#"${HOME}/"}"
   if [[ -f "$config_file" ]]; then
     echo "Backing up $config_file..."
     rclone copyto "$config_file" "${MACOS_DESTINATION}/${relative_path}" --progress
