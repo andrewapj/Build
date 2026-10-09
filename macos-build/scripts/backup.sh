@@ -73,6 +73,10 @@ shopt -s nullglob
 for config_file in \
   "${HOME}/.gitconfig" \
   "${HOME}/Library/Application Support/com.mitchellh.ghostty/config" \
+  "${HOME}/.config/opencode/AGENTS.md" \
+  "${HOME}/.config/opencode/cli.json" \
+  "${HOME}/.config/opencode/opencode.json" \
+  "${HOME}/.config/opencode/opencode.jsonc" \
   "${HOME}/.config/zed/settings.json" \
   "${HOME}/.config/zed/themes/"*.json; do
   relative_path="${config_file#"${HOME}/"}"
