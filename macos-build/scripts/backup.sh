@@ -70,6 +70,7 @@ fi
 # Ignore unmatched theme globs when the themes directory is missing or empty.
 shopt -s nullglob
 
+config_paths=()
 for config_file in \
   "${HOME}/.gitconfig" \
   "${HOME}/Library/Application Support/com.mitchellh.ghostty/config" \
@@ -81,11 +82,17 @@ for config_file in \
   "${HOME}/.config/zed/themes/"*.json; do
   relative_path="${config_file#"${HOME}/"}"
   if [[ -f "$config_file" ]]; then
-    echo "Backing up $config_file..."
-    rclone copyto "$config_file" "${MACOS_DESTINATION}/${relative_path}" --progress
-  else
-    echo "Config file not found: $config_file; skipping."
+    config_paths+=("$relative_path")
   fi
 done
+
+if (( ${#config_paths[@]} > 0 )); then
+  echo "Backing up configuration files..."
+  # Read only the listed files without scanning the home directory or remote.
+  printf '%s\n' "${config_paths[@]}" | rclone copy "$HOME" "$MACOS_DESTINATION" \
+    --files-from-raw - --no-traverse --transfers "$TRANSFERS" --progress
+else
+  echo "No configuration files found; skipping macOS backup."
+fi
 
 echo "Backup complete."
