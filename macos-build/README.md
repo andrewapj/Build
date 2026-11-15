@@ -18,7 +18,7 @@ A short guide to setting up a fresh Mac with Homebrew, applications, and shell c
 
 - Review `install_apps.sh` and `.zshrc`.
 - Back up your existing `~/.zshrc` if you want to keep it; the script replaces it.
-- Back up any locally modified skills in `~/.agents/skills/`; matching files are replaced by the bundled versions.
+- Back up any locally modified skills in `~/.config/opencode/skills/`; matching files are replaced by the bundled versions.
 - Run the setup script:
 
   ```sh
@@ -31,12 +31,12 @@ The script:
 - Installs the applications and development tools listed in `install_apps.sh`.
 - Copies `.zshrc` to your home directory, replacing any existing version.
 - Copies helper scripts from `scripts/` into `/usr/local/bin/`.
-- Creates `~/.agents/skills/` if needed and copies bundled skills from `skills/`, replacing matching files while leaving unrelated skills alone.
+- Creates `~/.config/opencode/skills/` if needed and copies bundled skills from `skills/`, replacing matching files while leaving unrelated skills alone.
 
 Maintain bundled skills in this repository's `skills/` directory so changes are versioned.
 
 ## 4. Restore access and configuration
 
-- Restore your SSH key from your password manager.
+- Run `gh-login.sh` to sign in to GitHub; Git uses this login for HTTPS remotes.
 - Set up rclone, which is required for the backup script.
 - Copy the config files in the backup's `macos` directory to their relevant directories under your home directory.

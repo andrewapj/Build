@@ -52,8 +52,8 @@ cp "$script_dir/.zshrc" "$HOME/.zshrc"
 
 # Create the skills directory and copy bundled skills, replacing matching files.
 log_stage "🧠 [4/6] Installing bundled skills"
-mkdir -p "$HOME/.agents/skills"
-cp -R "$script_dir/skills/." "$HOME/.agents/skills/"
+mkdir -p "$HOME/.config/opencode/skills"
+cp -R "$script_dir/skills/." "$HOME/.config/opencode/skills/"
 
 # Create the helper-script destination if needed, using sudo when required.
 log_stage "📁 [5/6] Preparing /usr/local/bin"
