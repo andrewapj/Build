@@ -26,9 +26,10 @@ script_dir="${0:A:h}"
 log_stage "📦 [2/6] Installing applications and development tools"
 brew install \
   1password \
-  chatgpt \
+  claude-code \
   cloc \
   docker-desktop \
+  gh \
   ghostty \
   git \
   go \
